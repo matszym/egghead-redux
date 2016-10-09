@@ -1,0 +1,14 @@
+version: '2'
+services:
+  app:
+    mem_limit: 400m
+    memswap_limit: 1g
+    environment:
+      - "TZ=Europe/Warsaw"
+    build: .
+    ports: 
+      - '4444:4444'
+    volumes:
+      - .:/home/nodejs/app
+      - /home/nodejs/app/node_modules
+    command: npm start
