@@ -25,6 +25,7 @@
     "enzyme": "2.4.1",
     "react-addons-test-utils": "15.3.2",
     "redux": "3.6.0",
+    "sinon": "1.17.6",
     "tap": "7.1.2",
     "tap-spec": "4.1.1",
     "tape": "4.6.2",

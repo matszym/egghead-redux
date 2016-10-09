@@ -1,6 +1,6 @@
 import test from 'tape';
 
-import counter from './counter.state';
+import {counter} from './counter.state';
 
 test('counter', nested => {
   nested.test('should change state acording to action.type', test => {
@@ -19,7 +19,7 @@ test('counter', nested => {
       { actual: counter(), expected: 0}
     ]
 
-    testSamples.forEach(({actual, expected}) => test.equal(actual, expected, `${actual} should equal ${expected}`));
+    testSamples.forEach(({actual, expected}) => test.equal(actual, expected, `-${actual} should equal ${expected}`));
 
     test.end();
   });
