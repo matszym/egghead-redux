@@ -7,3 +7,7 @@
 .counter__value--negative {
   color: #72243D;
 }
+
+.counter__value {
+  transition: color .3s ease-in;
+}

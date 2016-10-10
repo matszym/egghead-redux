@@ -10,7 +10,6 @@ test('<CounterComponent />', nested => {
   nested.test('should render 0 as initial state', test => {
     const wrapper = shallow(<CounterComponent value={ store.getState() } />);
 
-
     const actual = wrapper.find('.counter__value').text();
     const expected = '0';
     const msg = `Initial counter value (${actual}), should equal ${expected}`;
@@ -61,7 +60,7 @@ test('<CounterComponent />', nested => {
 
     test.notOk(actual, msg);
 
-    wrapper.find('.counter').simulate('wheel', {deltaY: 1});
+    wrapper.simulate('wheel', {deltaY: 1});
 
     actual = onDecrease.called;
     msg = `onDecrease have been called`;
