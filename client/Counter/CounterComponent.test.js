@@ -39,6 +39,36 @@ test('<CounterComponent />', nested => {
     test.assert(actual, `decrease should be called when clicked - button`);
     test.end();
   });
+  nested.test('should respond correctly to whell events', test => {
+    const onIncrease = spy();
+    const onDecrease = spy();
+    const wrapper = shallow(
+      <CounterComponent
+        value={ store.getState() }
+        onIncrease={ onIncrease }
+        onDecrease={ onDecrease }
+      />);
+
+    wrapper.simulate('wheel', { deltaY: -1});
+    
+    let actual = onIncrease.called;
+    let msg = `onIncrease have been called`;
+    
+    test.assert(actual, msg);
+
+    actual = onDecrease.called;
+    msg = `onDecrease have not been called yet`;
+
+    test.notOk(actual, msg);
+
+    wrapper.find('.counter').simulate('wheel', {deltaY: 1});
+
+    actual = onDecrease.called;
+    msg = `onDecrease have been called`;
+
+    test.assert(actual, msg);
+    test.end();
+  });
   nested.test('.counter__value modifiers', nested => {
     function processCounterComponent({value, classSuffix}) {
       const wrapper = shallow(

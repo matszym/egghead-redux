@@ -16,7 +16,7 @@ const CounterComponent = ({value, onIncrease, onDecrease}) => {
   const counterValueClass = 'counter__value ' + modifier;
 
   return (
-    <div className="counter">
+    <div className="counter" onWheel={ e => e.deltaY < 0 ? onIncrease() : onDecrease() }>
       <h1 className={counterValueClass}>{value}</h1>
       <button className="counter__button counter__button--decrease" onClick={onDecrease}>-</button>
       <button className="counter__button counter__button--increase" onClick={onIncrease}>+</button>
