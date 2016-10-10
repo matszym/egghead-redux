@@ -4,6 +4,7 @@ import {createStore} from 'redux';
 
 import CounterComponent from './Counter/CounterComponent.js';
 import {counter} from './Counter/counter.state';
+import './Counter/counter.css';
 
 const store = createStore(counter, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
@@ -20,7 +21,3 @@ const render = () => {
 
 store.subscribe(render);
 render();
-
-setInterval(function() {
-  console.log(store.getState());
-}, 1000);

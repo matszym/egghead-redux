@@ -1,0 +1,9 @@
+.counter__value--neutral {
+  color: #ccc;
+}
+.counter__value--positive {
+  color: #62997A;
+}
+.counter__value--negative {
+  color: #72243D;
+}
