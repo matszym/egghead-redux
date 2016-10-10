@@ -39,38 +39,45 @@ test('<CounterComponent />', nested => {
     test.assert(actual, `decrease should be called when clicked - button`);
     test.end();
   });
-  nested.test('should add neutral class modifier to counter__value when value === 0', test => {
-    const wrapper = shallow(
-      <CounterComponent 
-        value={ 0 }
-      />);
-
-    const actual = wrapper.find('.counter__value').hasClass('counter__value--neutral');
-    const msg = `${wrapper.find('.counter__value').node.props.className} should contain counter__value--neutral`;
-
-    test.assert(actual, msg);
-    test.end();
-  });
-  nested.test('should add positive class modifier to counter__value when value > 0', test => {
-    const wrapper = shallow(
-      <CounterComponent
-        value={ 1 }
-      />);
-    const actual = wrapper.find('.counter__value').hasClass('counter__value--positive');
-    const msg = `${wrapper.find('.counter__value').node.props.className} should contain counter__value--positive`;
+  nested.test('.counter__value modifiers', nested => {
+    function processCounterComponent({value, classSuffix}) {
+      const wrapper = shallow(
+        <CounterComponent 
+          value={ value }
+        />);
   
-    test.assert(actual, msg);
-    test.end();
-  });
-  nested.test('should add negative class modifier to counter__value when value < 0', test => {
-    const wrapper = shallow(
-      <CounterComponent
-        value={ -1 }
-      />);
-    const actual = wrapper.find('.counter__value').hasClass('counter__value--negative');
-    const msg = `${wrapper.find('.counter__value').node.props.className} should contain counter__value--negative`;
-  
-    test.assert(actual, msg);
-    test.end();
-  });
+      const actual = wrapper.find('.counter__value').hasClass(`counter__value${classSuffix}`);
+      const msg = `${wrapper.find('.counter__value').node.props.className} should contain counter__value${classSuffix}`;
+
+      return {actual, msg}
+    }
+
+    nested.test('--neutral', test => {
+      const {msg, actual} = processCounterComponent({
+        value: 0,
+        classSuffix: '--neutral' 
+      });
+      
+      test.assert(actual, msg);
+      test.end()
+    });
+    nested.test('--positive', test => {
+      const {msg, actual} = processCounterComponent({
+        value: 1,
+        classSuffix: '--positive'
+      });
+
+      test.assert(actual, msg);
+      test.end();
+    });
+    nested.test('--negative', test => {
+      const {msg, actual} = processCounterComponent({
+        value: -1,
+        classSuffix: '--negative'
+      });
+
+      test.assert(actual, msg);
+      test.end();
+    });
+  })
 });
