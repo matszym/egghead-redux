@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CounterComponent = ({value, increase, decrease}) => {
+const CounterComponent = ({value, onIncrease, onDecrease}) => {
   let modifier;
 
   if (value === 0) {
@@ -18,8 +18,8 @@ const CounterComponent = ({value, increase, decrease}) => {
   return (
     <div className="counter">
       <h1 className={counterValueClass}>{value}</h1>
-      <button className="counter__button counter__button--decrease" onClick={decrease}>-</button>
-      <button className="counter__button counter__button--increase" onClick={increase}>+</button>
+      <button className="counter__button counter__button--decrease" onClick={onDecrease}>-</button>
+      <button className="counter__button counter__button--increase" onClick={onIncrease}>+</button>
     </div>
   );
 }

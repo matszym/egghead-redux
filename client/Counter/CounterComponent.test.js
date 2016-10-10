@@ -19,21 +19,22 @@ test('<CounterComponent />', nested => {
     test.end();
   });
   nested.test('should call correct functions on button click', test => {
-    const increase = spy();
-    const decrease = spy();
+    const onIncrease = spy();
+    const onDecrease = spy();
     const wrapper = shallow(
       <CounterComponent 
         value={ store.getState() } 
-        increase={ increase }
-        decrease={ decrease }
+        onIncrease={ onIncrease }
+        onDecrease={ onDecrease }
       />);
+
     wrapper.find('.counter__button--increase').simulate('click');
-    let actual = increase.called;
+    let actual = onIncrease.called;
 
     test.assert(actual, `increase should be called when clicked + button`);
 
     wrapper.find('.counter__button--decrease').simulate('click');
-    actual = decrease.called;
+    actual = onDecrease.called;
 
     test.assert(actual, `decrease should be called when clicked - button`);
     test.end();
