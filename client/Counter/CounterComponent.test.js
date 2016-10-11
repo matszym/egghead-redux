@@ -108,5 +108,5 @@ test('<CounterComponent />', nested => {
       test.assert(actual, msg);
       test.end();
     });
-  })
+  });
 });
