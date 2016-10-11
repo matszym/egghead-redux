@@ -3,6 +3,7 @@ import test from 'tape';
 import {counter} from './counter.state';
 import addCounter from './add-counter';
 import removeCounter from './removeCounter';
+import incrementCounter from './increment-counter';
 
 test('counter', nested => {
   nested.test('should change state acording to action.type', test => {
@@ -71,6 +72,30 @@ test('counter', nested => {
       const expected = [1, 2, 3, 5];
       const msg = `originalArray should deepEqual copyArray`;
 
+      test.deepEqual(originalArray, copyArray, msg);
+      test.end();
+    });
+  });
+  nested.test('incrementCounter', nested => {
+    nested.test('should increment counter specified by index', test => {
+      const originalArray = [12, 5, 1, 6, 8];
+      const copyArray = [...originalArray];
+      const args = {originalArray, index: 2};
+      const actual = incrementCounter(args);
+      const expected = [12, 5, 2, 6, 8];
+      
+      test.deepEqual(actual, expected);
+      test.end();
+    });
+    nested.test('should not mutate originalArray', test => {
+      const originalArray = [32, 16, 8, 4, 2, 1];
+      const copyArray = [...originalArray];
+      const args = {originalArray, index: 1};
+      const actual = incrementCounter(args);
+      let msg = `originalArray should not point to actual variable`;
+
+      test.notEqual(actual, originalArray, msg);
+      msg = `${originalArray} should deepEqual ${copyArray}`
       test.deepEqual(originalArray, copyArray, msg);
       test.end();
     });
