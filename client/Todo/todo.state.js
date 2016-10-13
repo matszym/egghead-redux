@@ -13,14 +13,15 @@ const todo = (state = [], action) => {
     case 'TOGGLE_TODO': 
       return [
         ...state
-          .filter(task => task.id < action.payload.id)
-          .map(o => Object.assign({}, o)),
-        ...state
-          .filter(task => task.id === action.payload.id)
-          .map(o => Object.assign({}, o, {completed: !o.completed})),
-        ...state
-          .filter(task => task.id > action.payload.id)
-          .map(o => Object.assign({}, o))
+          .map(task => {
+            let toggleCompleted = {};
+
+            if (task.id === action.payload.id) {
+              toggleCompleted.completed = !task.completed;
+            }
+
+            return Object.assign({}, task, toggleCompleted);
+          })
       ];
     default:
       return [...state];
