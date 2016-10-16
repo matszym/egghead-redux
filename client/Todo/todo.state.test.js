@@ -77,4 +77,28 @@ test('todo reducer', nested => {
       test.end();
     });
   });
+  nested.test('VISIBILITY_FILTER', nested => {
+    nested.test('default', test => {
+      const actual = visibilityFilter();
+      const expected = 'SHOW_ALL';
+      const msg = `default should equal ${expected}`
+
+      test.equal(actual, expected, msg);
+      test.end();
+    });
+    nested.test('SET_VISIBILITY_FILTER', test => {
+      const action = {
+        type: 'SET_VISIBILITY_FILTER',
+        payload: {
+          filter: 'SHOW_COMPLETED'
+        }
+      }
+      const actual = visibilityFilter(undefined, action);
+      const expected = 'SHOW_COMPLETED';
+      const msg = `${actual} should equal ${expected}`;
+
+      test.equal(actual, expected, msg);
+      test.end();
+    });
+  });
 });
