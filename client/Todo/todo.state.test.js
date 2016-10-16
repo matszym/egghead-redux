@@ -1,5 +1,5 @@
 import test from 'tape';
-import todo from './todo.state';
+import {todos as todo, visibilityFilter} from './todo.state';
 
 test('todo reducer', nested => {
   nested.test('ADD_TODO', nested => {
