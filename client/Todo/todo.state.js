@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers, createStore } from 'redux';
 
 const todo = (state = {}, action) => {
   switch (action.type) {
@@ -44,4 +44,10 @@ const todoApp = combineReducers({
   visibilityFilter
 });
 
-export {todos, visibilityFilter, todoApp};
+const store = createStore(
+  todoApp, 
+  window.__REDUX_DEVTOOLS_EXTENSION__ && 
+  window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+export {todos, visibilityFilter, todoApp, store};

@@ -1,19 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
 
-import CounterComponent from './Counter/CounterComponent.js';
-import {counter} from './Counter/counter.state';
+import TodoComponent from './Todo/todo';
+import {todoApp, store} from './Todo/todo.state';
 import './Counter/counter.css';
-
-const store = createStore(counter, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 const render = () => {
   ReactDOM.render(
-    <CounterComponent 
-      value={ store.getState() }
-      onIncrease={ () => store.dispatch({ type: "INCREMENT" }) }
-      onDecrease={ () => store.dispatch({ type: "DECREMENT" }) }
+    <TodoComponent
+      todos={store.getState().todos}
     />,
     document.getElementById('app')
   );  
