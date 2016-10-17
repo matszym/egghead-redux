@@ -53,50 +53,48 @@ const getVisibleTodos = (todos, filter) => {
   }
 }
 
-class TodoComponent extends React.Component {
-  render() {
-    const {todos, visibilityFilter} = this.props;
-    const visibleTodos = getVisibleTodos(
-      todos,
-      visibilityFilter
-    );
-
-    return (
-      <div>
-        <AddTodo 
-          onAddClick={ 
-            text => 
-              store.dispatch({
-                type: 'ADD_TODO',
-                payload: {
-                  id: nextTodoId++,
-                  text
-                }
-              })
-          }
-        />
-        <TodoList 
-          todos={visibleTodos}
-          onTodoClick={id =>
-            store.dispatch({
-              type: 'TOGGLE_TODO',
-              payload: {
-                id
-              }
-            })
-          } />
-        <Footer 
-          visibilityFilter={visibilityFilter}
-          onFilterClick={filter => store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
+const TodoComponent = ({
+  todos, 
+  visibilityFilter
+}) => (
+  <div>
+    <AddTodo 
+      onAddClick={ 
+        text => 
+          store.dispatch({
+            type: 'ADD_TODO',
             payload: {
-              filter
+              id: nextTodoId++,
+              text
             }
-          })}
-        />
-      </div>
-    );
-  }
-}
+          })
+      }
+    />
+    <TodoList 
+      todos={
+        getVisibleTodos(
+          todos,
+          visibilityFilter
+        )
+      }
+      onTodoClick={id =>
+        store.dispatch({
+          type: 'TOGGLE_TODO',
+          payload: {
+            id
+          }
+        })
+      } />
+    <Footer 
+      visibilityFilter={visibilityFilter}
+      onFilterClick={filter => store.dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        payload: {
+          filter
+        }
+      })}
+    />
+  </div>
+);
 
 export default TodoComponent;
