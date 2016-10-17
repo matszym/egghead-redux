@@ -8,7 +8,7 @@ import './Counter/counter.css';
 const render = () => {
   ReactDOM.render(
     <TodoComponent
-      todos={store.getState().todos}
+      {...store.getState()}
     />,
     document.getElementById('app')
   );  
