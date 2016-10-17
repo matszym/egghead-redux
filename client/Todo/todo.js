@@ -2,6 +2,7 @@ import React from 'react';
 import {store} from './todo.state.js';
 
 import FilterLink from './FilterLink';
+import AddTodo from './AddTodo';
 
 let nextTodoId = 0;
 
@@ -62,21 +63,18 @@ class TodoComponent extends React.Component {
 
     return (
       <div>
-        <input ref={node => {
-          this.input = node;
-        }}/>
-        <button
-          onClick={() => {
-            store.dispatch({
-              type: 'ADD_TODO',
-              payload: {
-                text: this.input.value,
-                id: nextTodoId++
-              }
-            })
-        }}>
-          Add Todo
-        </button>
+        <AddTodo 
+          onAddClick={ 
+            text => 
+              store.dispatch({
+                type: 'ADD_TODO',
+                payload: {
+                  id: nextTodoId++,
+                  text
+                }
+              })
+          }
+        />
         <TodoList 
           todos={visibleTodos}
           onTodoClick={id =>
