@@ -4,7 +4,7 @@ import {store} from './todo.state.js';
 
 class FilterLink extends React.Component {
   render() {
-    const { filter, children, currentFilter } = this.props;
+    const { filter, children, currentFilter, onClick } = this.props;
     if (filter === currentFilter) {
       return <span>{children}</span>;
     }
@@ -13,12 +13,7 @@ class FilterLink extends React.Component {
         href="#"
         onClick={e => {
           e.preventDefault();
-          store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
-            payload: {
-              filter
-            }
-          });
+          onClick(filter);
         }}
       >
         {children}
