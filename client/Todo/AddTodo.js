@@ -1,10 +1,9 @@
 import React from 'react';
 
-import {store} from './todo.state';
-
-const AddTodo = ({onAddClick}) => { 
+const AddTodo = (props, {store}) => { 
   let input;
   let todoId = 0;
+
   return (
     <div>
       <input ref={node => {
@@ -27,5 +26,9 @@ const AddTodo = ({onAddClick}) => {
     </div>
   );
 };
+
+AddTodo.contextTypes = {
+  store: React.PropTypes.object
+}
 
 export default AddTodo;

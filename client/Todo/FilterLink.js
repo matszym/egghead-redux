@@ -1,10 +1,9 @@
 import React from 'react';
-
-import {store} from './todo.state.js';
 import Link from './Link.js';
 
 class FilterLink extends React.Component {
   componentDidMount() {
+    const {store} = this.context;
     this.unsubscribe = store.subscribe(() => 
       this.forceUpdate()
     )
@@ -14,6 +13,7 @@ class FilterLink extends React.Component {
   }
   render() {
     const {props} = this;
+    const {store} = this.context;
     const state = store.getState();
 
     return (
@@ -35,6 +35,10 @@ class FilterLink extends React.Component {
       </Link>
     );
   }
+}
+
+FilterLink.contextTypes = {
+  store: React.PropTypes.object
 }
 
 export default FilterLink;

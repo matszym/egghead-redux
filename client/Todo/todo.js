@@ -1,5 +1,4 @@
 import React from 'react';
-import {store} from './todo.state.js';
 
 import AddTodo from './AddTodo';
 import Footer from './Footer';
