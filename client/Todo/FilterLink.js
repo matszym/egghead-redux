@@ -1,23 +1,38 @@
 import React from 'react';
 
 import {store} from './todo.state.js';
+import Link from './Link.js';
 
 class FilterLink extends React.Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => 
+      this.forceUpdate()
+    )
+  }
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
   render() {
-    const { filter, children, currentFilter, onClick } = this.props;
-    if (filter === currentFilter) {
-      return <span>{children}</span>;
-    }
+    const {props} = this;
+    const state = store.getState();
+
     return (
-      <a 
-        href="#"
-        onClick={e => {
-          e.preventDefault();
-          onClick(filter);
-        }}
+      <Link
+        active={
+          props.filter ===
+          state.visibilityFilter
+        }
+        onClick={() => 
+          store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            payload: {
+              filter: props.filter
+            }
+          })
+        }
       >
-        {children}
-      </a>
+        {props.children}
+      </Link>
     );
   }
 }
